@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   res.json({msg: 'respond with a resource'});
 });
 
-router.post('/add', function(req, res) => {
+router.post('/add', (req, res) => {
 	const { phone, email, fname } = req.body;
 
 	db('users').where({phone: phone}).first()
