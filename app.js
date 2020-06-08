@@ -1,13 +1,24 @@
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+// Setup database in knex
+const db = require('knex')({
+	client: 'mysql2',
+	connection: {
+		host: process.env.DB_HOST,
+		user: process.env.DB_USER,
+		password: process.env.DB_PASS,
+		database: process.env.DB_SCHEMA
+	}
+});
 
 app.use(logger('dev'));
 app.use(express.json());
