@@ -19,8 +19,34 @@ router.get('/', function(req, res, next) {
 
 router.post('/add', function(req, res) => {
 	const { phone, email, fname } = req.body;
-	
-	db('users').where({phone: adminId}).first()
+
+	db('users').where({phone: phone}).first()
+		.then((data) => {
+			if(data.length === 0 || !data.id) {
+				db('users').insert({
+					phone, email, fname
+				}, ['id'])
+					.then((id) => {
+						res.json({
+							status: 'success',
+							msg: `User ${id} has been successfully added to the database!`
+						});
+					})
+					.catch((err) => {
+						res.status(503).json({
+							status: 'error',
+							msg: `Problem adding user to the database.\n${err}`
+						});
+					});
+			}
+		})
+		.catch((err) => {
+			console.log(err);
+			res.json({
+				status: 'error',
+				msg: `We're unable to query the database at this time.\n${err}`
+			});
+		});
 })
 
 module.exports = router;
