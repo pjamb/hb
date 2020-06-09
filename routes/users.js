@@ -18,11 +18,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/add', (req, res) => {
+	console.log(req.body);
 	const { phone, email, fname } = req.body;
 
 	db('users').where({phone: phone}).first()
 		.then((data) => {
-			if(data.length === 0 || !data.id) {
+			if(!data || !data.id) {
 				db('users').insert({
 					phone, email, fname
 				}, ['id'])
