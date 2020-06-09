@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var cors = require('cors');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -27,6 +28,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors({
+	origin: [
+		`${process.env.FRONT_URL}`
+	],
+	credentials: true
+})); // Hopefully this will help our remote stuff, which I doubt
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
