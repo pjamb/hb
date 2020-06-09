@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
 	origin: [
-		`${process.env.FRONT_URL}`
+		`${process.env.FRONT_URL}`, '*'
 	],
 	credentials: true
 })); // Hopefully this will help our remote stuff, which I doubt
