@@ -18,6 +18,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/add', (req, res) => {
+
+  res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  // Set custom headers for CORS
+  res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
 	console.log(req.body);
 	const { phone, email, fname } = req.body;
 
