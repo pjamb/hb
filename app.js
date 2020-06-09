@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 dotenv.config();
 
-// const bodyParser = require('body-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -27,8 +26,6 @@ const db = require('knex')({
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(bodyParser.json()); // support json encoded bodies
-// app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
 app.use(cookieParser());
 
 app.use('/', indexRouter);
