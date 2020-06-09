@@ -28,13 +28,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors({
-	origin: [
-		'http://localhost:8082',
-		'https://powerjamb.ng'
-	],
-	credentials: true
-})); // Hopefully this will help our remote stuff, which I doubt
+app.use(cors()); // Hopefully this will help our remote stuff, which I doubt
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
