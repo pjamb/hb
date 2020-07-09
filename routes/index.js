@@ -3,6 +3,7 @@ var router = express.Router();
 var cors = require('cors');
 
 router.use(cors({
+	credentials: true,
 	origin: 'https://powerjamb.ng'
 }));
 
